@@ -1,15 +1,12 @@
-
-#include "test.hpp"
-#include <SDL2/SDL.h>
+#include "Screen.hpp"
 #undef main
 #include <iostream>
 
-void test::bad(){
-    std::cout << "Hello!" << std::endl;
-}
+std::string target = "https://github.com/BenH9999";
 
 int main(){
-    test::bad();
+    Screen s(500,500, 21);
+    s.init();
 
     return 0;
 }
