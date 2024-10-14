@@ -42,8 +42,10 @@ bool Screen::init(){
     SDL_RenderPresent(renderer);
 
     SDL_Event e;
-    while(SDL_PollEvent(&e)!=0){
-        if(e.type == SDL_QUIT) exit(0);
+    while(true){
+        while(SDL_PollEvent(&e)!=0){
+		    if(e.type == SDL_QUIT) exit(0);
+    	}
     }
 
     return EXIT_SUCCESS;
