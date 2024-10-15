@@ -1,17 +1,17 @@
 #pragma once
 
 #include <SDL2/SDL.h>
+#include "gen.hpp"
 #include <iostream>
 
 class Screen{
     private:
         SDL_Window* window;
         SDL_Renderer* renderer;
-        int HEIGHT;
-        int WIDTH;
-        int grid_size;      
+        int window_size;
+        const int SCALE = 25;
     public:
-        Screen(int h, int w, int grid_size);
+        Screen(int grid_size);
         Screen();
         ~Screen();
         bool init();

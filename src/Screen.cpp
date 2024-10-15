@@ -1,19 +1,15 @@
 #include "Screen.hpp"
 
-Screen::Screen(int h, int w, int grid_size){
+Screen::Screen(int grid_size){
     this->window = nullptr;
     this->renderer = nullptr;
-    this->HEIGHT = h;
-    this->WIDTH = w;
-    this->grid_size = grid_size;
+    this->window_size = grid_size * SCALE;
 }
 
 Screen::Screen(){
     this->window = nullptr;
     this->renderer = nullptr;
-    this->HEIGHT = 500;
-    this->WIDTH = 500;
-    this->grid_size = 21;
+    this->window_size = 5 * SCALE;
 }
 
 bool Screen::init(){
@@ -23,7 +19,7 @@ bool Screen::init(){
         return EXIT_FAILURE;
     }
 
-    this->window = SDL_CreateWindow("QR Code", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, this->WIDTH, this->HEIGHT, 0);
+    this->window = SDL_CreateWindow("QR Code", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, window_size, window_size, 0);
     if(!this->window){
         std::cout << "Error creating window: " << SDL_GetError() << std::endl;
         system("pause");
@@ -37,7 +33,7 @@ bool Screen::init(){
         return EXIT_FAILURE;
     }
 
-    SDL_SetRenderDrawColor(renderer, 0,255,0,255);
+    SDL_SetRenderDrawColor(renderer, 255,0,255,255);
     SDL_RenderClear(renderer);
     SDL_RenderPresent(renderer);
 

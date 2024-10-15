@@ -40,7 +40,7 @@ function(download_sdl2)
     # Set paths for SDL2 include, lib, and bin directories
     set(SDL2_INCLUDE_DIR "${SDL2_EXTRACTED_FOLDER}/x86_64-w64-mingw32/include")
     set(SDL2_LIB_DIR "${SDL2_EXTRACTED_FOLDER}/x86_64-w64-mingw32/lib")
-    set(SDL2_BIN_DIR "${SDL2_EXTRACTED_FOLDER}/i686-w64-mingw32/bin") # DLL directory
+    set(SDL2_BIN_DIR "${SDL2_EXTRACTED_FOLDER}/x86_64-w64-mingw32/bin") # DLL directory
 
     # Ensure the header files exist
     if (NOT EXISTS "${SDL2_INCLUDE_DIR}")
@@ -59,7 +59,7 @@ function(download_sdl2)
 
     # Copy include files to the correct location
     message(STATUS "Copying SDL2 headers to ${CMAKE_SOURCE_DIR}/include/SDL2")
-    execute_process(COMMAND ${CMAKE_COMMAND} -E copy_directory "${SDL2_INCLUDE_DIR}" "${CMAKE_SOURCE_DIR}/include/SDL2")
+    execute_process(COMMAND ${CMAKE_COMMAND} -E copy_directory "${SDL2_INCLUDE_DIR}" "${CMAKE_SOURCE_DIR}/include")
 
     # Copy lib files to the correct location
     message(STATUS "Copying SDL2 libraries to ${CMAKE_SOURCE_DIR}/lib")
