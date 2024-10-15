@@ -34,3 +34,4 @@
 include/SDL2/
 build/
 lib/
+./cache/
