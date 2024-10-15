@@ -30,6 +30,7 @@
 
 *.idx
 *.json
+*.dll
 
 include/SDL2/
 build/
