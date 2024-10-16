@@ -18,4 +18,5 @@ class gen{
 
         void gen_qr();
         std::vector<Vector2> generate_finder_pattern(int x, int y);
+        std::vector<Vector2> generate_allignment_pattern();
 };
