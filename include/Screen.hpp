@@ -10,7 +10,7 @@ class Screen{
         SDL_Window* window;
         SDL_Renderer* renderer;
         int window_size;
-        const int SCALE = 20;
+        int SCALE;
     public:
         Screen(int grid_size, std::vector<std::vector<int>> grid);
         Screen();

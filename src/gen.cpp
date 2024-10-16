@@ -31,22 +31,36 @@ void gen::gen_qr(){
 std::vector<Vector2> gen::generate_allignment_pattern(){
     std::vector<Vector2> allignment_coords;
     std::vector<Vector2> center_points;
-    std::<vector<int> row_cols;
+    std::vector<int> row_cols;
     
+    int intervals = this->grid_type / 7 + 1;
+    int distance = 4 * this->grid_type + 4;
+    int step = std::lround((double)distance/(double)intervals);
+    step += step & 0b1;
+
     row_cols.push_back(6);
 
-    if(this->grid_type < 7){
-        int position = this->grid_size - 7;
+    for(int i = 1; i <= intervals; i++){
+        int position = 6 + distance - step * (intervals - i);
         row_cols.push_back(position);
     }
-    else{
-        int num_rows_cols = std::ceil((double)(this->grid_type+2)/7.0)+1;
 
-        int diff_rows_cols = (grid_size -13) / (num_rows_cols -1);
+    for(int i = 0; i < row_cols.size(); i++){
+        for(int j = 0; j < row_cols.size(); j++){
+            if ((i == 0 && j == 0) || (i == 0 && j == row_cols.size() - 1) || (i == row_cols.size() - 1 && j == 0)) continue;
+            Vector2 temp = {row_cols[i],row_cols[j]};
+            center_points.push_back(temp);
+        }
+    }
 
-        for(int i = 1; i < num_rows_cols; i++){
-            int position = 6 + i * diff_rows_cols;
-            row_cols.push_back(position);
+    for(const Vector2& center : center_points){
+        for(int dy = -2; dy <= 2; dy++){
+            for(int dx = -2; dx <= 2; dx++){
+                Vector2 coord = {center.x +dx, center.y + dy};
+                if(std::abs(dx) == 2 || std::abs(dy)== 2) allignment_coords.push_back(coord);
+                else if(std::abs(dx) == 1 || std::abs(dy) ==1) continue;
+                else if(dx == 0 && dy == 0) allignment_coords.push_back(coord);
+            }
         }
     }
 

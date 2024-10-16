@@ -3,7 +3,13 @@
 Screen::Screen(int grid_size, std::vector<std::vector<int>> grid){
     this->window = nullptr;
     this->renderer = nullptr;
-    this->window_size = grid_size * SCALE;
+    this->SCALE = 25;
+
+    while(grid_size * SCALE >725){
+        this->SCALE--;
+    }
+
+    this->window_size = (grid_size + 8) * SCALE; //+8 for Quiet Zone
     this->init();
     this->draw_qr(grid, grid_size);
 }
@@ -19,8 +25,8 @@ void Screen::draw_qr(std::vector<std::vector<int>> grid, int grid_size){
 
     for(int y = 0; y < grid_size; y++){
         for (int x = 0; x < grid_size; x++){
-            rect.x = x*SCALE;
-            rect.y = y*SCALE;
+            rect.x = (x+4)*SCALE; //+4 for Quiet Zone
+            rect.y = (y+4)*SCALE;   
             rect.w = SCALE;
             rect.h = SCALE;
 
@@ -39,6 +45,19 @@ void Screen::draw_qr(std::vector<std::vector<int>> grid, int grid_size){
             SDL_RenderFillRect(this->renderer, &rect);
         }
     }
+    
+    SDL_SetRenderDrawColor(this->renderer, 200, 200, 200, 255);
+    
+    for (int x = 0; x <= grid_size; x++) {
+        int x_pos = (x + 4) * SCALE;
+        SDL_RenderDrawLine(this->renderer, x_pos, 4 * SCALE, x_pos, (grid_size + 4) * SCALE);
+    }
+
+    for (int y = 0; y <= grid_size; y++) {
+        int y_pos = (y + 4) * SCALE;
+        SDL_RenderDrawLine(this->renderer, 4 * SCALE, y_pos, (grid_size + 4) * SCALE, y_pos);
+    }
+
     SDL_RenderPresent(this->renderer);
 
     SDL_Event e;
