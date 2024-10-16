@@ -1,7 +1,8 @@
 #pragma once
 
 #include <SDL2/SDL.h>
-#include "gen.hpp"
+#include "util.hpp"
+
 #include <iostream>
 
 class Screen{
@@ -9,10 +10,12 @@ class Screen{
         SDL_Window* window;
         SDL_Renderer* renderer;
         int window_size;
-        const int SCALE = 25;
+        const int SCALE = 20;
     public:
-        Screen(int grid_size);
+        Screen(int grid_size, std::vector<std::vector<int>> grid);
         Screen();
         ~Screen();
         bool init();
+
+        void draw_qr(std::vector<std::vector<int>> grid, int grid_size);
 };
