@@ -8,7 +8,6 @@ class gen{
         int grid_size;
 
         std::vector<std::vector<int>> qr_grid;
-        std::vector<Vector2> active_squares;
         std::string target;
     public:
         gen(Type grid_type, std::string input);
@@ -17,6 +16,8 @@ class gen{
         int get_size(); 
 
         void gen_qr();
-        std::vector<Vector2> generate_finder_pattern(int x, int y);
-        std::vector<Vector2> generate_allignment_pattern();
+        void generate_finder_pattern(int x, int y);
+        void generate_allignment_pattern();
+        void generate_timer_pattern();
+        void reserve_format_version();
 };

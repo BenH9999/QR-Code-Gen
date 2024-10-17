@@ -37,6 +37,12 @@ void Screen::draw_qr(std::vector<std::vector<int>> grid, int grid_size){
                 case 1:
                     SDL_SetRenderDrawColor(this->renderer,0,0,0,255);
                     break;
+                case 2:
+                    SDL_SetRenderDrawColor(this->renderer,168,182,189,255);
+                    break;
+                case 3:
+                    SDL_SetRenderDrawColor(this->renderer,59,68,255,255);
+                    break;
                 default:
                     //Error
                     SDL_SetRenderDrawColor(this->renderer,255,0,0,255);

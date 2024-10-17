@@ -31,6 +31,7 @@
 *.idx
 *.json
 *.dll
+*.bat
 
 include/SDL2/
 build/
