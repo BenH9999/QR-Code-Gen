@@ -38,8 +38,4 @@ class calc_version{
         void encode_numeric();
         void encode_alphanumeric();
         void encode_byte();
-
-        void test
-
-
 };
