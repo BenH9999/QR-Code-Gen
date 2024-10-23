@@ -5,7 +5,7 @@ calc_version::calc_version(std::string input){
     this->ISO88591 = false;
     this->UTF8 = false;
 
-    this->encoding_type = get_encoding_type(); 
+    this->encoding_type = get_encoding_type();
 }
 
 
@@ -24,17 +24,31 @@ void calc_version::encode_data(){
             encode_byte();
             break;
     }
+    add_indicators();
+}
+
+void calc_version::add_indicators(){
+    std::bitset<8> char_count(this->input.length());
+    std::cout << "character count: " << char_count << std::endl;
+
+    std::bitset<4> mode_indicator(this->mode[this->encoding_type]);
+    std::cout << "mode: " << mode_indicator << std::endl;
+
+    
 }
 
 void calc_version::encode_byte(){
     int bit_index = 0;
     for(unsigned char c : this->input){
         std::bitset<8> byte_bits(c); 
-        for(int i = 0; i < 8; i++){ //swap to flip bits
-            this->binary_input[bit_index++] = byte_bits[i];
+        for(int i = 7; i >= 0; i--){ //swap to flip bits
+            this->binary_input.push_back(byte_bits[i]);
         }
     }
-    std::cout << "Test|| Byte Encoding: " << this->binary_input << std::endl;
+    for(bool bit : binary_input)
+        std::cout << bit;
+    std::cout << std::endl; 
+
 }
 
 void calc_version::encode_numeric(){
@@ -47,6 +61,14 @@ void calc_version::encode_alphanumeric(){
     /*
      * TODO
      */
+}
+
+Type calc_version::find_version(){
+    Type version = EMPTY;
+    /*
+     * TODO
+     */
+    return version;
 }
 
 EncodingType calc_version::get_encoding_type(){
