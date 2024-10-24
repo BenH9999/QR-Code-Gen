@@ -3,6 +3,7 @@
 #include "SDL_config.h"
 #include "gen.hpp"
 #include <map>
+#include <algorithm>
 #include <bitset>
 #include <codecvt>
 #include <locale>
@@ -31,6 +32,8 @@ class calc_version{
         std::vector<bool> binary_input;
 
         bool ISO88591, UTF8;
+        Type version;
+        ec_level ec;
 
     public:
         calc_version(std::string input);
@@ -48,4 +51,6 @@ class calc_version{
         void encode_byte();
         void add_indicators();
         Type find_version();
+
+        void start_generator();
 };

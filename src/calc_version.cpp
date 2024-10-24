@@ -4,6 +4,8 @@ calc_version::calc_version(std::string input){
     this->input = input;
     this->ISO88591 = false;
     this->UTF8 = false;
+    this->ec = M;   
+    this->version = find_version();
 
     this->encoding_type = get_encoding_type();
 }
@@ -28,11 +30,26 @@ void calc_version::encode_data(){
 }
 
 void calc_version::add_indicators(){
-    std::bitset<8> char_count(this->input.length());
-    std::cout << "character count: " << char_count << std::endl;
+    int string_length = this->input.length();
+    int total_bits = (this->version > Type::VER9) ? 16 : 8;
+    std::vector<bool> bits;
+    while(string_length > 0){
+        bits.push_back(string_length % 2);
+        string_length /=2;
+    }
+    std::reverse(bits.begin(), bits.end());
+
+    while(bits.size() < total_bits){
+        bits.insert(bits.begin(), 0);
+    }
+    
+    std::cout << "length indicator: ";
+    for(bool b : bits){
+        std::cout << b;
+    }
 
     std::bitset<4> mode_indicator(this->mode[this->encoding_type]);
-    std::cout << "mode: " << mode_indicator << std::endl;
+    std::cout << "\nmode: " << mode_indicator << std::endl;
 
     
 }
@@ -64,11 +81,19 @@ void calc_version::encode_alphanumeric(){
 }
 
 Type calc_version::find_version(){
-    Type version = EMPTY;
+    int version = 0;
+    std::cout << "Enter Version: ";
+    std::cin >> version;
     /*
      * TODO
      */
-    return version;
+    return Type(version);
+}
+
+void calc_version::start_generator(){
+    gen g(Type(this->version), this->input);
+
+    g.gen_qr();
 }
 
 EncodingType calc_version::get_encoding_type(){

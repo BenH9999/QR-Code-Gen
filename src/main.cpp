@@ -4,15 +4,16 @@
 std::string target = "https://github.com/BenH9999";
 
 int main(){
-    int version;
+    /*int version;
     std::cout << "Enter QR Version:" << std::endl;
-    std::cin >> version;
+    std::cin >> version;*/
 
     calc_version c(target);
     c.encode_data();
+    c.start_generator();
 
-    gen g(Type(version), target);
-    g.gen_qr();
+    /*gen g(Type(version), target);
+    g.gen_qr();*/
 
     return 0;
 }
